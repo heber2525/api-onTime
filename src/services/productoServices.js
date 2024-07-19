@@ -1,5 +1,5 @@
 const Producto = require("../models/Producto");
-const empleadoServices = require("./empleadoServices");
+const usuarioServices = require("./usuarioServices");
 
 const productoServices = {
   create: async (data) => {
@@ -24,4 +24,4 @@ const productoServices = {
     return producto;
   },
 };
-module.exports = empleadoServices;
+module.exports = usuarioServices;
