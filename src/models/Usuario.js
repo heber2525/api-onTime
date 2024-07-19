@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const empleadoSchema = new mongoose.Schema({
+const usuarioSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, "Nombre obligatorio"],
@@ -25,21 +26,26 @@ const empleadoSchema = new mongoose.Schema({
   },
   categoria: {
     type: String,
-    validate: () => {
-      if (this.rol === "empleado") {
-        return true;
-      }
+    validate: {
+      validator: function (value) {
+        if (this.rol === "empleado") {
+          return true;
+        }
+      },
     },
     enum: ["cocinero", "camarero"],
   },
+  horarios: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Horario",
+    },
+  ],
+  empresa: {
+    type: Schema.Types.ObjectId,
+    ref: "Empresa",
+  },
 });
-const Empleado = mongoose.model("Empleado", empleadoSchema);
+const Usuario = mongoose.model("Usuario", usuarioSchema);
 
-module.exports = Empleado;
-
-// "horarios": [
-//         { "dia": "Lunes", "horaInicio": "08:00", "horaFin": "17:00" },
-//         { "dia": "Martes", "horaInicio": "08:00", "horaFin": "17:00" },
-//         { "dia": "Miércoles", "horaInicio": "08:00", "horaFin": "17:00" },
-//         // Agrega más días según sea necesario
-//     ],
+module.exports = Usuario;

@@ -15,10 +15,23 @@ const horarioSchema = new mongoose.Schema({
     type: String,
     required: [true, "campo requerido"],
   },
-  empleado: {
+  fechaInicio: {
+    type: Date,
+    required: [true, "campo requerido"],
+  },
+  fechaFin: {
+    type: Date,
+    required: [true, "campo requerido"],
+  },
+  empresa: {
     type: Schema.Types.ObjectId,
-    ref: "Empleado",
-    required: [true, "Oblgatorio"],
+    ref: "Empresa",
+    required: [true, "campo requerido"],
+  },
+  usuario: {
+    type: Schema.Types.ObjectId,
+    ref: "Usuario",
+    required: [true, "campo requerido"],
   },
 });
 const Horario = mongoose.model("Horario", horarioSchema);
