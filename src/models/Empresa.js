@@ -10,12 +10,6 @@ const empresaSchema = new mongoose.Schema({
     type: String,
     required: [true, "CIF obligatorio"],
   },
-  horarios: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Horario",
-    },
-  ],
   ubicacion: {
     type: Schema.Types.ObjectId,
     ref: "Ubicacion",
@@ -26,6 +20,14 @@ const empresaSchema = new mongoose.Schema({
       ref: "Usuario",
     },
   ],
+  horarioApertura: {
+    type: String,
+    required: true,
+  },
+  horarioCierre: {
+    type: String,
+    required: true,
+  },
 });
 const Empresa = mongoose.model("Empresa", empresaSchema);
 

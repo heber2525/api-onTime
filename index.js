@@ -1,7 +1,5 @@
 const express = require("express");
 const usuarioRoute = require("./src/routes/usuarioRoute.js");
-const proveedorRoute = require("./src/routes/proveedorRouter.js");
-const productoRoute = require("./src/routes/productoRoute");
 const authRoute = require("./src/routes/authRoute");
 const horarioRoute = require("./src/routes/horarioRoute.js");
 const presentismoRoute = require("./src/routes/presentismoRoute.js");
@@ -25,8 +23,6 @@ app.use(
 );
 app.use("/usuarios", usuarioRoute);
 app.use("/auth", authRoute);
-app.use("/producto", productoRoute);
-app.use("/proveedor", proveedorRoute);
 app.use("/horario", horarioRoute);
 app.use("/presentismo", presentismoRoute);
 app.use("/empresa", empresaRoute);

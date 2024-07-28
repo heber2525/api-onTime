@@ -14,4 +14,8 @@ router.put("/:id", horarioController.modify);
 
 router.get("/:id", horarioController.getOne);
 
+router.get("/empresa/:empresaId", horarioController.getOneByEmpresaId);
+
+router.get("/usuario/:usuarioId", horarioController.getOne);
+
 module.exports = router;

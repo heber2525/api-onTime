@@ -30,6 +30,7 @@ const presentismoSchema = new mongoose.Schema({
   },
   firmado: {
     type: Boolean,
+    default: false,
   },
 });
 

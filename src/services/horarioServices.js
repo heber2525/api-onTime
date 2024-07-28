@@ -21,6 +21,16 @@ const horarioServices = {
     const horario = await Horario.findById(id);
     return await horario;
   },
+  getOneByEmpresaId: async (empresaId, fechaInicio, fechaFin) => {
+    let consulta = { empresa: empresaId };
+
+    consulta = fechaInicio ? { ...consulta, fechaInicio: { $gte: new Date(fechaInicio) } } : consulta;
+    consulta = fechaFin ? { ...consulta, fechaFin: { $lte: new Date(fechaFin) } } : consulta;
+
+    console.log(consulta);
+    const horario = await Horario.find(consulta);
+    return await horario;
+  },
 };
 
 module.exports = horarioServices;

@@ -61,6 +61,18 @@ const horarioController = {
       res.status(400).send(error);
     }
   },
+  getOneByEmpresaId: async (req, res) => {
+    try {
+      const empresaId = req.params.empresaId;
+      const { fechaDesde, fechaHasta } = req.query;
+
+      const horario = await horarioServices.getOneByEmpresaId(empresaId, fechaDesde, fechaHasta);
+      res.send(horario);
+    } catch (error) {
+      console.log(error, "error de conexion");
+      res.status(400).send(error);
+    }
+  },
 };
 
 module.exports = horarioController;

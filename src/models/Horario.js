@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const horarioSchema = new mongoose.Schema({
   dia: {
     type: String,
-    enum: ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"],
+    enum: ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo"],
     required: [true, "Campo requerido"],
   },
   horarioEntrada: {

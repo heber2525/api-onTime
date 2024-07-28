@@ -18,7 +18,7 @@ const empresaServices = {
     return await empresa;
   },
   getOne: async (id) => {
-    const empresa = await Empresa.findById(id).populate(["horarios", "empleados", "ubicacion"]);
+    const empresa = await Empresa.findById(id).populate(["empleados", "ubicacion"]);
     return await empresa;
   },
 };
