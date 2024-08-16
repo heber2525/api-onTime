@@ -73,6 +73,18 @@ const horarioController = {
       res.status(400).send(error);
     }
   },
+  getOneByUsuarioId: async (req, res) => {
+    try {
+      const usuarioId = req.params.usuarioId;
+      const { fechaDesde, fechaHasta } = req.query;
+
+      const horario = await horarioServices.getOneByUsuarioId(usuarioId, fechaDesde, fechaHasta);
+      res.send(horario);
+    } catch (error) {
+      console.log(error, "error de conexion");
+      res.status(400).send(error);
+    }
+  },
 };
 
 module.exports = horarioController;

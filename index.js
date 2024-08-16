@@ -11,6 +11,7 @@ const verifyToken = require("./src/middlewares/verifyToken.js");
 const notFound = require("./src/middlewares/notFound.js");
 const handleError = require("./src/middlewares/handleError.js");
 
+require("./src/scheduler/scheduler.js");
 require("dotenv").config();
 db();
 const PORT = process.env.PORT || 3001;

@@ -14,6 +14,10 @@ router.put("/:id", presentismoController.modify);
 
 router.get("/:id", presentismoController.getOne);
 
+router.get("/empresa/:empresaId", presentismoController.getOneByEmpresaId);
+
+router.get("/usuario/:usuarioId", presentismoController.getOneByUsuarioId);
+
 module.exports = router;
 
 // POST /presentismo - Registrar presentismo (incluye verificación de proximidad).

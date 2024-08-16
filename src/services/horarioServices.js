@@ -27,6 +27,19 @@ const horarioServices = {
     consulta = fechaInicio ? { ...consulta, fechaInicio: { $gte: new Date(fechaInicio) } } : consulta;
     consulta = fechaFin ? { ...consulta, fechaFin: { $lte: new Date(fechaFin) } } : consulta;
 
+    const horario = await Horario.find(consulta);
+    return await horario;
+  },
+  getOneByUsuarioId: async (usuarioId, fechaInicio, fechaFin) => {
+    let consulta = { usuario: usuarioId };
+    const fechaComienzo = new Date(fechaInicio);
+    const fechaFinal = new Date(fechaFin);
+    fechaComienzo.setHours(0, 0, 0, 0);
+    fechaFinal.setHours(23, 59, 59, 999);
+
+    consulta = fechaInicio ? { ...consulta, fechaInicio: { $gte: fechaComienzo } } : consulta;
+    consulta = fechaFin ? { ...consulta, fechaFin: { $lte: fechaFinal } } : consulta;
+
     console.log(consulta);
     const horario = await Horario.find(consulta);
     return await horario;

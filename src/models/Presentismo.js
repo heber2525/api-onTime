@@ -22,11 +22,9 @@ const presentismoSchema = new mongoose.Schema({
   },
   horaEntrada: {
     type: String,
-    required: true,
   },
   horaSalida: {
     type: String,
-    required: true,
   },
   firmado: {
     type: Boolean,
