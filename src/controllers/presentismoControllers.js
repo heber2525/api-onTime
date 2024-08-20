@@ -12,7 +12,7 @@ const presentismoController = {
       const horarios = await horarioServices.getOneByUsuarioId(usuarioId, fechaFormateada, fechaFormateada);
       const empresa = await empresaServices.getOne(empresaId);
       // const presentismo = await presentismoServices.create(req.body);
-      console.log(fechaActual, usuarioId, fechaFormateada);
+      console.log("presentismo controller", fechaActual, usuarioId, fechaFormateada);
 
       // res.send(presentismo);
       res.send(horarios);

@@ -30,19 +30,39 @@ const horarioServices = {
     const horario = await Horario.find(consulta);
     return await horario;
   },
+  // getOneByUsuarioId: async (usuarioId, fechaInicio, fechaFin) => {
+  //   let consulta = { usuario: usuarioId };
+  //   const fechaComienzo = new Date(fechaInicio);
+  //   const fechaFinal = new Date(fechaFin);
+  //   fechaComienzo.setHours(0, 0, 0, 0);
+  //   fechaFinal.setHours(23, 59, 59, 999);
+
+  //   consulta = fechaInicio ? { ...consulta, fechaInicio: { $gte: fechaComienzo } } : consulta;
+  //   consulta = fechaFin ? { ...consulta, fechaFin: { $lte: fechaFinal } } : consulta;
+
+  //   console.log("console log consulta horario", consulta);
+  //   const horario = await Horario.find(consulta);
+  //   return await horario;
+  // },
   getOneByUsuarioId: async (usuarioId, fechaInicio, fechaFin) => {
     let consulta = { usuario: usuarioId };
-    const fechaComienzo = new Date(fechaInicio);
-    const fechaFinal = new Date(fechaFin);
-    fechaComienzo.setHours(0, 0, 0, 0);
-    fechaFinal.setHours(23, 59, 59, 999);
 
-    consulta = fechaInicio ? { ...consulta, fechaInicio: { $gte: fechaComienzo } } : consulta;
-    consulta = fechaFin ? { ...consulta, fechaFin: { $lte: fechaFinal } } : consulta;
+    // Convertir a Date solo si fechaInicio y fechaFin existen
+    if (fechaInicio) {
+      const fechaComienzo = new Date(fechaInicio);
+      fechaComienzo.setHours(0, 0, 0, 0);
+      consulta = { ...consulta, fechaInicio: { $gte: fechaComienzo } };
+    }
 
-    console.log(consulta);
+    if (fechaFin) {
+      const fechaFinal = new Date(fechaFin);
+      fechaFinal.setHours(23, 59, 59, 999);
+      consulta = { ...consulta, fechaFin: { $lte: fechaFinal } };
+    }
+
+    console.log("log de la consulta horario", consulta);
     const horario = await Horario.find(consulta);
-    return await horario;
+    return horario;
   },
 };
 

@@ -2,11 +2,6 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const horarioSchema = new mongoose.Schema({
-  dia: {
-    type: String,
-    enum: ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado", "Domingo"],
-    required: [true, "Campo requerido"],
-  },
   horarioEntrada: {
     type: String,
     required: [true, "campo requerido"],
