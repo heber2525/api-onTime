@@ -30,39 +30,29 @@ const horarioServices = {
     const horario = await Horario.find(consulta);
     return await horario;
   },
-  // getOneByUsuarioId: async (usuarioId, fechaInicio, fechaFin) => {
-  //   let consulta = { usuario: usuarioId };
-  //   const fechaComienzo = new Date(fechaInicio);
-  //   const fechaFinal = new Date(fechaFin);
-  //   fechaComienzo.setHours(0, 0, 0, 0);
-  //   fechaFinal.setHours(23, 59, 59, 999);
-
-  //   consulta = fechaInicio ? { ...consulta, fechaInicio: { $gte: fechaComienzo } } : consulta;
-  //   consulta = fechaFin ? { ...consulta, fechaFin: { $lte: fechaFinal } } : consulta;
-
-  //   console.log("console log consulta horario", consulta);
-  //   const horario = await Horario.find(consulta);
-  //   return await horario;
-  // },
   getOneByUsuarioId: async (usuarioId, fechaInicio, fechaFin) => {
+    // Crea la consulta básica para el usuario
     let consulta = { usuario: usuarioId };
 
-    // Convertir a Date solo si fechaInicio y fechaFin existen
-    if (fechaInicio) {
-      const fechaComienzo = new Date(fechaInicio);
-      fechaComienzo.setHours(0, 0, 0, 0);
-      consulta = { ...consulta, fechaInicio: { $gte: fechaComienzo } };
+    // Si se proporciona una fecha de inicio y una fecha de fin
+    if (fechaInicio || fechaFin) {
+      const fechaConsultaInicio = fechaInicio ? new Date(fechaInicio) : new Date("1970-01-01");
+      const fechaConsultaFin = fechaFin ? new Date(fechaFin) : new Date("9999-12-31");
+
+      fechaConsultaInicio.setHours(0, 0, 0, 0);
+      fechaConsultaFin.setHours(23, 59, 59, 999);
+
+      // Agrega las condiciones para intersectar el rango de fechas
+      consulta = {
+        ...consulta,
+        fechaInicio: { $lte: fechaConsultaFin }, // La fecha de inicio del horario debe ser antes o igual que la fecha final de la consulta
+        fechaFin: { $gte: fechaConsultaInicio }, // La fecha de fin del horario debe ser después o igual que la fecha de inicio de la consulta
+      };
     }
 
-    if (fechaFin) {
-      const fechaFinal = new Date(fechaFin);
-      fechaFinal.setHours(23, 59, 59, 999);
-      consulta = { ...consulta, fechaFin: { $lte: fechaFinal } };
-    }
-
-    console.log("log de la consulta horario", consulta);
-    const horario = await Horario.find(consulta);
-    return horario;
+    console.log("Consulta:", consulta);
+    const horarios = await Horario.find(consulta);
+    return horarios;
   },
 };
 
